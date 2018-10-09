@@ -1,0 +1,66 @@
+<!--持有-->
+<template>
+  <ui-page>
+    <ui-view class="topContent">
+      <ui-text block class="title total-title">总金额(元)</ui-text>
+      <ui-text block class="total-amount">53,086.53</ui-text>
+      <ui-view ui:show="{{flag ? true : false}}">
+        <ui-text class="title">买入待确认</ui-text>
+        <ui-text class="confirm-amount">50.00</ui-text>
+        <ui-text class="title">元</ui-text>
+      </ui-view>
+      <ui-row>
+        <ui-col border-right align="center" vertical-align="middle">
+          <ui-text block class="title">昨日收益(元)</ui-text>
+          <ui-text block>-408.91</ui-text>
+        </ui-col>
+        <ui-col border-right align="center" vertical-align="middle">
+          <ui-text block class="title">持有收益(元)</ui-text>
+          <ui-text block>-7,801.71</ui-text>
+        </ui-col>
+        <ui-col align="center" vertical-align="middle">
+          <ui-text block class="title">累计收益(元)</ui-text>
+          <ui-text block>-7,978.13</ui-text>
+        </ui-col>
+      </ui-row>
+    </ui-view>
+  </ui-page>
+</template>
+
+<script>
+export default {
+  config: {
+    navigationBarTitleText: "基金"
+  },
+  data() {
+    return {
+      flag: true
+    }
+  },
+  methods: {},
+  mounted() {}
+}
+</script>
+
+<style lang="less">
+.topContent {
+  background: #1B82D2;
+  text-align: center;
+  padding: 40rpx 0 30rpx 0;
+  font-size: 32rpx;
+  color: #ffffff;
+  .title {
+    font-size: 26rpx;
+    color: #A1CBEC;
+  }
+  .total-amount {
+    font-size: 80rpx;
+  }
+  .ui-row {
+    margin-top: 40rpx;
+  }
+  .confirm-amount {
+    font-size: 28rpx;
+  }
+}
+</style>

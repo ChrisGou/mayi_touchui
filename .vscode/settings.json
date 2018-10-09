@@ -1,0 +1,20 @@
+{
+    "touchui.deving": false,
+    "touchui.builded": false,
+    "touchui.enable": true,
+    "files.associations": {
+        "*.jsp": "java",
+        "*.vue": "vue",
+        "*.ui": "vue",
+        "*.wxa": "vue",
+        "*.wx": "vue",
+        "*.wxc": "vue"
+    },
+    "vetur.extensions": [
+        ".ui",
+        ".wxa",
+        ".wx",
+        ".wxc"
+    ],
+    "touchuiwx.enable": true
+}

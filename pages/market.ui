@@ -1,0 +1,454 @@
+<template>
+  <ui-page>
+    <ui-row class="topContent bg-FFF">
+      <ui-col align="center" vertical-align="middle">
+          <ui-icon type="JiJinPaiHang" color="#3187ff" class="icon"></ui-icon>
+          <ui-text block>基金排行</ui-text>
+      </ui-col>
+      <ui-col align="center" vertical-align="middle">
+          <ui-icon type="ZiXuanJiJin" color="#fe5f3f" class="icon"></ui-icon>
+          <ui-text block>自选基金</ui-text>
+      </ui-col>
+      <ui-col align="center" vertical-align="middle">
+          <ui-icon type="ZhuTiXuanJi" color="#feb941" class="icon"></ui-icon>
+          <ui-text block>主题选基</ui-text>
+      </ui-col>
+    </ui-row>
+    <!-- 好基工作室 -->
+    <mayi-cell title="好基工作室" tip="更多" linkto="asdasd"></mayi-cell>
+    <ui-view class="hjgzs bg-FFF">
+      <ui-text block class="title">中欧行业成长混合A</ui-text>
+      <ui-text class="tip">近3年涨跌幅</ui-text>
+      <ui-text class="rate">+31.37%</ui-text>
+      <ui-icon type="arrow-triangular-up" color="#fff2f2" class="info-arrow"></ui-icon>
+      <ui-row class="info">
+        <ui-col span="2" align="center" vertical-align="middle" class="info-l">
+          <ui-text>好基</ui-text>
+          <ui-text>点评</ui-text>
+        </ui-col>
+        <ui-col align="center" vertical-align="middle">
+          <ui-text>连连抓住行业涨幅冠亚军</ui-text>
+        </ui-col>
+      </ui-row>
+      <ui-button type="primary" class="btn">10元体验好基金</ui-button>
+    </ui-view>
+    <!-- 稳健理财 -->
+    <mayi-cell title="稳健理财" info="攒住工资就靠TA"></mayi-cell>
+    <ui-view class="wjlc bg-FFF">
+      <ui-row border-bottom>
+        <ui-col border-right vertical-align="middle" align="center">
+          <ui-text block class="title">汇添富和聚宝货币</ui-text>
+          <ui-text block class="rate">3.4190%</ui-text>
+          <ui-text block class="tip">七日年化</ui-text>
+        </ui-col>
+        <ui-col vertical-align="middle" align="center">
+          <ui-text block class="title">南方天天利货币A</ui-text>
+          <ui-text block class="rate">3.5970%</ui-text>
+          <ui-text block class="tip">七日年化</ui-text>
+        </ui-col>
+      </ui-row>
+      <ui-row border-bottom>
+        <ui-col border-right vertical-align="middle" align="center">
+          <ui-text block class="title">汇添富理财7天债券A</ui-text>
+          <ui-text block class="rate">3.6050%</ui-text>
+          <ui-text block class="tip">七日年化</ui-text>
+        </ui-col>
+        <ui-col vertical-align="middle" align="center">
+          <ui-text block class="title">汇添富理财60天债券E</ui-text>
+          <ui-text block class="rate">3.8350%</ui-text>
+          <ui-text block class="tip">七日年化</ui-text>
+        </ui-col>
+      </ui-row>
+    </ui-view>
+    <!-- 每天10块钱 -->
+    <mayi-cell title="每天10块钱" info="提前入市等牛来" tip="更多" linkto="asdasd"></mayi-cell>
+    <ui-view class="mtskq bg-FFF">
+      <ui-text block class="title">每周10元淘宝美国名企</ui-text>
+      <ui-text block class="rate">+36.93%</ui-text>
+      <ui-text block class="tip">近三年定投收益率</ui-text>
+      <ui-button type="primary" class="btn">立即定投</ui-button>
+    </ui-view>
+    <!-- 绩优基金 -->
+    <mayi-cell title="绩优基金" info="精选好基，又逢布局好时机"></mayi-cell>
+    <ui-view class="jyjj bg-FFF">
+      <ui-row>
+        <ui-col span="4" border-right vertical-align="middle">
+          <ui-text block class="rate">+64.91%</ui-text>
+          <ui-text block class="tip">近三年涨跌幅</ui-text>
+        </ui-col>
+        <ui-col span="8" vertical-align="middle" class="right-col">
+          <ui-text block class="name">嘉实美国成长股票(QDII)</ui-text>
+          <ui-text block class="info">精选美国成长股</ui-text>
+        </ui-col>
+      </ui-row>
+      <ui-row class="is-not-first-row" border-top>
+        <ui-col span="4" border-right vertical-align="middle">
+          <ui-text block class="rate">+83.34%</ui-text>
+          <ui-text block class="tip">近三年涨跌幅</ui-text>
+        </ui-col>
+        <ui-col span="8" vertical-align="middle" class="right-col">
+          <ui-text block class="name">国泰纳斯达克100指数(QDII)</ui-text>
+          <ui-text block class="info">做TOP5科技巨头股东</ui-text>
+        </ui-col>
+      </ui-row>
+    </ui-view>
+    <!-- 投资热点 -->
+    <mayi-cell title="投资热点" tip="更多" linkto="asdasd"></mayi-cell>
+    <ui-view class="tzrd bg-FFF">
+      <ui-row>
+        <ui-col span="3">
+          <ui-view>计算机</ui-view>
+        </ui-col>
+        <ui-col vertical-align="middle">
+          <ui-text block class="info">业绩回暖迎机会</ui-text>
+          <ui-text block class="tip">政策护航 高速增长</ui-text>
+        </ui-col>
+      </ui-row>
+      <ui-row border-top>
+        <ui-col span="3">
+          <ui-view>银行</ui-view>
+        </ui-col>
+        <ui-col vertical-align="middle">
+          <ui-text block class="info">抓住MSCI机会</ui-text>
+          <ui-text block class="tip">A股入摩，银行受益</ui-text>
+        </ui-col>
+      </ui-row>
+    </ui-view>
+    <!-- 投资海外 -->
+    <mayi-cell title="投资海外" info="一键布局全球"></mayi-cell>
+    <ui-view class="tzhw bg-FFF">
+      <ui-row>
+        <ui-col span="4" border-right vertical-align="middle">
+          <ui-text block class="rate">+25.47%</ui-text>
+          <ui-text block class="tip">近三年涨跌幅</ui-text>
+        </ui-col>
+        <ui-col span="8" vertical-align="middle" class="right-col">
+          <ui-text block class="name">华夏海外收益债券A(QDII)</ui-text>
+          <ui-text block class="info">10元当全球债主</ui-text>
+        </ui-col>
+      </ui-row>
+      <ui-row class="is-not-first-row" border-top>
+        <ui-col span="4" border-right vertical-align="middle">
+          <ui-text block class="rate">+86.24%</ui-text>
+          <ui-text block class="tip">近三年涨跌幅</ui-text>
+        </ui-col>
+        <ui-col span="8" vertical-align="middle" class="right-col">
+          <ui-text block class="name">广发纳斯达克100指数(QDII)</ui-text>
+          <ui-text block class="info">全球科技吸金盛宴</ui-text>
+        </ui-col>
+      </ui-row>
+    </ui-view>
+    <!-- 基金财富号 -->
+    <mayi-cell title="基金财富号" info="专业机构" tip="更多" linkto="asdasd"></mayi-cell>
+    <ui-row-list border-left-indent class="jjcfh bg-FFF">
+      <ui-row>
+        <ui-col span="3" vertical-align="middle" align="center">
+          <ui-image src="https://chrisgou.github.io/images/mayi_img/yfd.png"  width="50" height="50" class="head_portrait"></ui-image>
+        </ui-col>
+        <ui-col vertical-align="middle" border-left class="right-col">
+          <ui-text block class="name">易方达基金财富号</ui-text>
+          <ui-text block class="info">五千万客户选了，来吧</ui-text>
+          <ui-text block class="tip">买入费率1折起</ui-text>
+        </ui-col>
+      </ui-row>
+      <ui-row>
+        <ui-col span="3" vertical-align="middle" align="center">
+          <ui-image src="https://chrisgou.github.io/images/mayi_img/gyrx.png"  width="50" height="50" class="head_portrait"></ui-image>
+        </ui-col>
+        <ui-col vertical-align="middle" border-left class="right-col">
+          <ui-text block class="name">工银瑞信基金财富号</ui-text>
+          <ui-text block class="info">聪明理财，工银一路陪伴</ui-text>
+          <ui-text block class="tip">买入费率1折起</ui-text>
+        </ui-col>
+      </ui-row>
+      <ui-row>
+        <ui-col span="3" vertical-align="middle" align="center">
+          <ui-image src="https://chrisgou.github.io/images/mayi_img/gt.png" width="50" height="50" class="head_portrait"></ui-image>
+        </ui-col>
+        <ui-col vertical-align="middle" border-left class="right-col">
+          <ui-text block class="name">国泰基金财富号</ui-text>
+          <ui-text block class="info">股基投资NO.1，快跟上</ui-text>
+          <ui-text block class="tip">买入费率1折起</ui-text>
+        </ui-col>
+      </ui-row>
+    </ui-row-list>
+    <!-- 底部说明 -->
+    <ui-view class="footer-info">
+      <ui-text block class="tip">基金销售服务由蚂蚁（杭州）基金销售有限公司提供</ui-text>
+      <ui-text block class="info">本页面非任何法律文件，投资前请阅读基金合同、招募说明书。过往业绩不预示未来表现，市场有风险，投资需谨慎。</ui-text>
+      <ui-text block class="company">——— 该页面由蚂蚁财富平台设计并提供 ———</ui-text>
+    </ui-view>
+  </ui-page>
+</template>
+
+<script>
+import MayiCell from "#/component/mayi-cell.ui";
+export default {
+  config: {
+    navigationBarTitleText: "基金",
+    backgroundColor: "#F4F4F4",
+    navigationBarTextStyle: "black"
+  },
+  components: {
+    MayiCell
+  },
+  data() {
+    return {
+      buttonText: "界面跳转",
+      isShow: true
+    };
+  },
+  methods: {
+    sliderShow() {
+      this.isShow = true;
+    },
+    navHandle() {
+      ui.navigateTo({
+        url: "/pages/detail"
+      });
+    }
+  },
+  mounted() {
+    //首屏页面需要在mounted中延时才能调用框架api，其他页面不需要延时
+    setTimeout(() => {
+      //关闭app启动图
+      ui.closeSplashscreen();
+    }, 1000);
+  }
+};
+</script>
+
+<style lang="less">
+.topContent {
+  padding: 30rpx 0;
+  margin-bottom: 20rpx;
+  .icon {
+    font-size: 50rpx;
+    line-height: 1;
+  }
+}
+
+.hjgzs {
+  margin-bottom: 20rpx;
+  padding: 40rpx 0 20rpx 0;
+  text-align: center;
+  .title > span {
+    font-family: "Helvetica";
+    font-weight: bold;
+    font-size: 32rpx;
+  }
+  .tip > span {
+    font-size: 28rpx;
+    color: #979797;
+  }
+  .rate > span {
+    font-family: "Helvetica";
+    font-weight: bold;
+    font-size: 28rpx;
+    color: #fe5f3f;
+  }
+  .info-arrow {
+    line-height: 1;
+    display: block;
+  }
+  .info {
+    width: 80%;
+    margin: 0 auto;
+    background: #fff2f2;
+    padding: 10rpx 0;
+    .info-l {
+      .mix-1px(0, 1, 0, 0, #ccc);
+      .ui-text > span {
+        font-family: "Helvetica";
+        font-weight: bold;
+        font-size: 30rpx;
+        color: #fe5f3f;
+      }
+    }
+    .ui-text {
+      line-height: 1.3;
+    }
+  }
+  .btn {
+    width: 80%;
+    border-radius: 2px;
+    margin-top: 40rpx;
+    font-size: 30rpx;
+  }
+}
+
+.wjlc {
+  margin-bottom: 20rpx;
+  .ui-row::after {
+    border-color: #eee4e4;
+  }
+  .ui-row {
+    .ui-col-border-right::after {
+      border-color: #eee4e4;
+    }
+    .ui-col {
+      padding: 30rpx 0;
+      .title {
+        width: 78%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .rate {
+        margin-top: 30rpx;
+      }
+      .title > span {
+        font-size: 32rpx;
+      }
+      .rate > span {
+        font-size: 44rpx;
+        color: #fe5f3f;
+        line-height: 1;
+      }
+      .tip > span {
+        font-size: 24rpx;
+        color: #979797;
+      }
+    }
+  }
+}
+
+.mtskq {
+  margin-bottom: 20rpx;
+  padding: 40rpx;
+  text-align: center;
+  .rate {
+    margin-top: 30rpx;
+  }
+  .title > span {
+    font-size: 36rpx;
+    font-family: "Helvetica";
+    font-weight: bold;
+  }
+  .rate > span {
+    font-size: 50rpx;
+    color: #fe5f3f;
+    line-height: 1;
+  }
+  .tip > span {
+    font-size: 24rpx;
+    color: #979797;
+  }
+  .btn {
+    width: 90%;
+    border-radius: 2px;
+    margin-top: 30rpx;
+    font-size: 30rpx;
+  }
+}
+
+.jyjj,
+.tzhw {
+  padding: 40rpx 0 40rpx 30rpx;
+  margin-bottom: 20rpx;
+  .right-col {
+    padding-left: 40rpx;
+    padding-right: 20rpx;
+  }
+  .is-not-first-row {
+    margin-top: 40rpx;
+    padding-top: 40rpx;
+  }
+  .name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .rate > span {
+    font-size: 46rpx;
+    color: #fe5f3f;
+    line-height: 50rpx;
+  }
+  .tip > span {
+    font-size: 24rpx;
+    color: #979797;
+  }
+  .name > span {
+    font-size: 36rpx;
+    line-height: 50rpx;
+  }
+  .info > span {
+    font-size: 24rpx;
+    color: #979797;
+  }
+}
+
+.tzrd {
+  padding: 20rpx 0;
+  margin-bottom: 20rpx;
+  .ui-row {
+    padding: 20rpx 0;
+    margin-left: 30rpx;
+  }
+  .ui-view {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 62rpx;
+    border: 4rpx solid #219bf0;
+    color: #219bf0;
+    font-family: "Helvetica";
+    font-weight: bold;
+    .mix-flex-center();
+  }
+  .info > span {
+    font-size: 36rpx;
+  }
+  .tip > span {
+    font-size: 24rpx;
+    color: #979797;
+  }
+}
+
+.jjcfh {
+  margin-bottom: 20rpx;
+  .ui-row {
+    height: 200rpx;
+    padding: 40rpx 0;
+  }
+  .ui-col {
+    line-height: 1.3;
+  }
+  .right-col {
+    padding-left: 40rpx;
+  }
+  .name > span {
+    font-size: 30rpx;
+  }
+  .info > span {
+    font-size: 24rpx;
+    color: #979797;
+  }
+  .tip > span {
+    font-size: 24rpx;
+    color: #fe5f3f;
+  }
+}
+
+.footer-info {
+  margin-top: 40rpx;
+  margin-bottom: 10rpx;
+  padding: 30rpx;
+  text-align: center;
+  .tip > span {
+    font-size: 26rpx;
+    color: #979797;
+  }
+  .info {
+    line-height: 1.2;
+    margin: 10rpx 0;
+  }
+  .info > span {
+    font-size: 26rpx;
+    color: #b9b7b7;
+  }
+  .company > span {
+    font-size: 26rpx;
+    color: #b9b7b7;
+  }
+}
+</style>

@@ -1,0 +1,77 @@
+<template>
+    <ui-view class="mayi-cell bg-FFF">
+      <ui-view class="border"></ui-view>
+      <ui-view class="content">
+        <ui-text class="title">{{ title }}</ui-text>
+        <ui-text class="info">{{ info }}</ui-text>
+        <ui-view ui:if="{{linkto}}" class="right">
+          <ui-text ui:if="{{tip}}" class="tip">{{ tip }}</ui-text>
+          <ui-icon type="arrow-r" color="#979797" size="14"></ui-icon>
+        </ui-view>
+      </ui-view>
+    </ui-view>
+</template>
+
+<script>
+export default {
+  name: "mayi-cell",
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    info: String,
+    tip: String,
+    linkto: String
+  },
+  methods: {
+    handleBack() {
+      ui.navigateBack();
+    }
+  }
+};
+</script>
+
+<style lang="less">
+.mayi-cell {
+  display: flex;
+  padding: 30rpx 0;
+  .mix-flex-y-center();
+  .mix-1px(0, 0, 1, 0, #eee4e4);
+}
+
+.border {
+  margin-left: 30rpx;
+  width: 8rpx;
+  height: 28rpx;
+  background: #3399ff;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 20rpx;
+  .mix-flex-y-center();
+  .title > span {
+    font-size: 32rpx;
+    font-family: "Helvetica";
+    font-weight: bold;
+  }
+
+  .info {
+    font-size: 26rpx;
+    margin-left: 10rpx;
+    color: #999999;
+  }
+
+  .right {
+    font-size: 28rpx;
+    margin-left: auto;
+
+    .tip {
+      color: #979797;
+    }
+  }
+}
+</style>

@@ -1,0 +1,367 @@
+<script>
+export default {
+  config: {
+    pages: ["pages/market", "pages/detail", "pages/mine"],
+    theme: {
+      "theme-color": "#3399ff"
+    },
+    window: {
+      scrollType: "div",
+      navigationBarBackgroundColor: "#ffffff",
+      navigationBarTextStyle: "black",
+      navigationBarBorderColor: "rgba(231, 231, 231, 0.6)"
+    },
+    tabBar: {
+      color: "#7a7e83",
+      selectedColor: "#39f",
+      borderColor: "rgba(231, 231, 231, 0.6)",
+      backgroundColor: "#fff",
+      list: [
+        {
+          pagePath: "pages/market",
+          iconPath: "images/shichang.png",
+          selectedIconPath: "images/shichang-active.png",
+          text: "市场"
+        },
+        {
+          pagePath: "pages/user",
+          iconPath: "images/zixuan.png",
+          selectedIconPath: "images/zixuan-active.png",
+          text: "自选"
+        },
+        {
+          pagePath: "pages/mine",
+          iconPath: "images/chiyou.png",
+          selectedIconPath: "images/chiyou-active.png",
+          text: "持有"
+        }
+      ]
+    },
+    networkBaseUrl: ""
+  },
+  data() {
+    return {
+      //全局变量
+      globalData: {},
+      WIN_WIDTH: ui.WIN_WIDTH,
+      tabIndex: 0,
+      tabBarList: [],
+      navStyle: {},
+      tabBar: {},
+      tabBarHeight: 56,
+      isApp: ui.IS_APP,
+      headerHeight: ui.DEFAULT_HEADER_HEIGHT,
+      paths: [],
+      barHeight: ui.STATUS_BAR_HEIGHT,
+      showSlideMenu: false
+    };
+  },
+  computed: {
+    // 控制通用导航栏是否显示
+    navigationBarVisible() {
+      return this.winConfig.navigationStyle !== "custom";
+    },
+    // 控制通用导航栏是否显示返回按钮（首页不显示，其他页显示）
+    showBack() {
+      let homePath = this.paths[0];
+      if (this.tabBar && this.tabBar.paths) {
+        return this.tabBar.paths.indexOf(homePath) < 0;
+      } else {
+        return homePath !== this.$route.path;
+      }
+    },
+    // 通用导航栏应用app.json和page.json的设置
+    winConfig() {
+      let window = this.$router.options.window;
+      let config = { ...window, ...this.pageConfig };
+      let color = config.navigationBarTextStyle || "white";
+
+      let scrollType = document.body.getAttribute("scroll-type");
+
+      this.navStyle = {
+        backgroundColor: config.navigationBarBackgroundColor,
+        color: color,
+        borderBottom: `1px solid ${config.navigationBarBorderColor}`,
+        backgroundImage: config.navigationBarBackgroundGradient,
+        position: scrollType === "body" ? "fixed" : "absolute"
+      };
+
+      if (this.navStyle.backgroundColor) {
+        this.navStyle.backgroundImage = "none";
+      }
+
+      if (config.navigationBarBorderColor) {
+        this.navStyle.borderBottom = `1px solid ${
+          config.navigationBarBorderColor
+        }`;
+      } else {
+        this.navStyle.borderBottom = "0";
+      }
+      return config;
+    },
+    // 控制底部标签栏是否显示
+    isTabBar() {
+      return this.tabBarList && this.tabBarList.length > 0;
+    },
+    // 设置底部标签栏样式
+    tabBarStyle() {
+      let style = {};
+      if (this.navigationBarVisible && this.tabBar.position === "top") {
+        style.top = this.headerHeight + "px";
+      }
+      let scrollType = document.body.getAttribute("scroll-type");
+      style.position = scrollType === "body" ? "fixed" : "absolute";
+      return style;
+    },
+
+    bottom() {
+      return this.isTabBar ? `${this.tabBarHeight}px` : 0;
+    },
+    // 底部标签栏应用app.json和page.json的设置
+    pageConfig() {
+      if (this.isTabBar) {
+        return this.tabBarList[this.tabIndex].pageConfig;
+      } else {
+        return this.$route.meta.pageConfig || window.__$uiPageConfig;
+      }
+    }
+  },
+  watch: {
+    "$route.path"(path) {
+      this.handleIosGesture();
+      this.initTab();
+      this.initBodyStyle();
+    }
+  },
+  // 初始化
+  created() {
+    this.initTab();
+    this.initPaths();
+    this.$nextTick(() => {
+      this.handleIosGesture();
+    });
+  },
+  methods: {
+    handleNavIconTap() {
+      this.showSlideMenu = !this.showSlideMenu;
+    },
+    // 初始化底部标签栏
+    initTab() {
+      this.tabBar = this.getTabBar();
+      this.tabBarList = this.tabBar.list;
+      if (this.tabBar.paths) {
+        this.tabIndex = this.tabBar.paths.indexOf(this.$route.path);
+      }
+    },
+    // 初始化路由
+    initPaths() {
+      let routes = this.$router.options.routes;
+      this.paths = routes.map(item => {
+        return item.path;
+      });
+    },
+    initBodyStyle() {
+      if (this.winConfig && this.winConfig.backgroundColor) {
+        document.body.style.backgroundColor = this.winConfig.backgroundColor;
+      }
+    },
+    // iOS是否禁用侧滑退出
+    handleIosGesture() {
+      if (ui.IS_IOS) {
+        ui.setPagePopGesture &&
+          ui.setPagePopGesture({
+            openPagePopGesture: !this.pageConfig.disableIosGesture
+          });
+      }
+    },
+    // tabBar示例用到，底部标签栏切换前事件处理
+    handleTabBeforeChange({ id, index, next }) {
+      next();
+    },
+
+    // tabBar示例用到，底部标签栏切换后事件处理
+    handleTabChange({ id, index }) {},
+    // 回退处理
+    handleBack() {
+      ui.navigateBack();
+    },
+    getTabBar() {
+      let tabBars = [
+        this.$router.options.tabBar,
+        ...this.$router.options.pageTabBars
+      ];
+      for (let i = 0; i < tabBars.length; i++) {
+        if (
+          tabBars[i].paths &&
+          tabBars[i].paths.indexOf(this.$route.path) > -1
+        ) {
+          return tabBars[i];
+        }
+      }
+      return {};
+    }
+  },
+  mounted() {}
+};
+</script>
+
+<template>
+  <ui-view id="ui-app">
+    <ui-slide-menu width="280" threshold="30" touch="{{ pageConfig.touchSlideMenu }}" ui:model="showSlideMenu">
+
+    <ui-view slot="menu" class="menu">
+      <ui-text block style="color:#fff;margin:10px">侧滑菜单</ui-text>
+    </ui-view>
+
+    <ui-view slot="panel">
+    <!-- 通用导航栏 -->
+      <ui-nav-bar
+        ui:if="pageConfig"
+        ui:show="navigationBarVisible"
+        style="{{ navStyle }}">
+        <ui-row>
+          <ui-col width="80">
+            <span class="back" bindtap="handleBack" ui:show="{{showBack}}">
+              <ui-icon type="arrow-left" font-size="24"></ui-icon>返回
+            </span>
+            <span class="back" ui:show="{{!showBack}}" bindtap="handleNavIconTap">
+              <ui-icon type="list" color="#2B333B" size="16"></ui-icon>
+            </span>
+          </ui-col>
+          <ui-col width="{{WIN_WIDTH-160}}" align="center" content-direction="row" class="nav-bar-center">
+            <ui-view class="nav-bar-center-loading" style="display: none;"></ui-view>
+            <span class="nav-bar-center-text">{{ $t(winConfig.navigationBarTitleText) }}</span>
+          </ui-col>
+          <ui-col width="80">
+
+          </ui-col>
+        </ui-row>
+      </ui-nav-bar>
+
+    <!-- 页面路由 -->
+    <keep-alive>
+      <router-view ui:if="{{ !isApp && pageConfig.cache }}" class="router-view"></router-view>
+    </keep-alive>
+    <router-view ui:if="{{ isApp || !pageConfig.cache }}" class="router-view"></router-view>
+
+    <!-- 底部标签栏 -->
+    <ui-tab-bar
+        bindbeforechange="handleTabBeforeChange"
+        bindchange="handleTabChange"
+        ui:if="isTabBar"
+        ui:model="tabIndex"
+        style="{{ tabBarStyle }}"
+        id="{{ tabBar.id }}"
+        group-id="{{ tabBar.groupId }}"
+        icon-size="{{ tabBar.iconSize }}"
+        font-size="{{ tabBar.fontSize }}"
+        position="{{ tabBar.position }}"
+        list="{{ tabBarList }}"
+        paths="{{ tabBar.paths }}"
+        background-color="{{ tabBar.backgroundColor }}"
+        border-color="{{ tabBar.borderColor }}"
+        color="{{ tabBar.color }}"
+        selected-color="{{ tabBar.selectedColor }}">
+    </ui-tab-bar>
+  </ui-view>
+  </ui-slide-menu>
+  </ui-view>
+</template>
+
+
+
+<style lang="less">
+@import "./static/css/animate.css";
+@import "./static/css/loading.less";
+@import "./static/font/iconfont.css";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB",
+    "Microsoft YaHei", SimSun, sans-serif;
+  -webkit-touch-callout: none;
+}
+
+html,
+body {
+  font-size: 12px;
+}
+// 由于rpx换算采用的浮点数运算，不适合用于小号字体（10px 12px 14px这种）
+.font-10 {
+  font-size: 10px;
+}
+.font-12 {
+  font-size: 12px;
+}
+.font-14 {
+  font-size: 14px;
+}
+@media screen and (max-width: 320px) {
+  .font-12 {
+    font-size: 10px;
+  }
+  .font-14 {
+    font-size: 12px;
+  }
+}
+
+#ui-app {
+  width: 100%;
+  height: 100%;
+}
+
+.touchui-hover {
+  background-color: #eee !important;
+}
+.iphonex-bottom {
+  height: env(safe-area-inset-bottom);
+  background-color: #fff;
+  width: 100%;
+}
+.ui-nav-bar {
+  top: 0;
+  left: 0;
+  width: 100%;
+  .nav-bar-left,
+  .nav-bar-right {
+    position: relative;
+    width: 66px;
+    text-align: center;
+  }
+  .back {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    i {
+      margin-left: 10px;
+    }
+  }
+  .nav-bar-center-text {
+    .mix-text-overflow();
+  }
+}
+
+.ui-tab-bar {
+  &.div-scroll {
+    position: absolute;
+  }
+  &.body-scroll {
+    position: fixed;
+  }
+}
+
+.router-view {
+  width: 100%;
+}
+
+.bg-FFF {
+  background-color: #fff;
+}
+
+</style>

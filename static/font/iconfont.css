@@ -1,0 +1,52 @@
+@font-face {
+    font-family: "ui-icon";
+    src: url('iconfont.ttf?t=1502549776894') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url('iconfont.svg?t=1502549776894#ui-icon') format('svg');
+    /* iOS 4.1- */
+}
+
+.ui-icon {
+    font-family: "ui-icon" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-detail:before { content: "\e608"; }
+
+.icon-ZiXuanJiJin:before { content: "\e602"; }
+
+.icon-arrowsdown:before { content: "\e62e"; }
+
+.icon-arrowsup:before { content: "\e634"; }
+
+.icon-chaoshijiaoyiliushui:before { content: "\e633"; }
+
+.icon-ShiChang:before { content: "\e77b"; }
+
+.icon-calendar:before { content: "\e609"; }
+
+.icon-ZhuTiXuanJi:before { content: "\e627"; }
+
+.icon-ChiYou-Active:before { content: "\e673"; }
+
+.icon-JiJinPaiHang:before { content: "\e987"; }
+
+.icon-ShiChang-Active:before { content: "\e626"; }
+
+.icon-tag-add:before { content: "\f04e"; }
+
+.icon-ZiXuan:before { content: "\f04d"; }
+
+.icon-ChiYou:before { content: "\e666"; }
+
+.icon-arrow-r:before { content: "\e643"; }
+
+.icon-arrow-b:before { content: "\e614"; }
+
+.icon-arrow-l:before { content: "\e7ad"; }
+
+.icon-arrow-t:before { content: "\e746"; }
+
+.icon-arrow-triangular-up:before { content: "\e667"; }

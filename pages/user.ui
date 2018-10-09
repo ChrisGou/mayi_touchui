@@ -1,0 +1,85 @@
+<template>
+    <ui-page >
+      <ui-nav-bar slot="nav-bar"  class="nav_bar">
+        <ui-row height="46">
+          <ui-col vertical-align="middle" align="center" width="50">
+            <ui-icon name="ring" size="24" color="#fff"></ui-icon>
+          </ui-col>
+          <ui-col vertical-align="middle" align="center">
+            <ui-view class="nav_title">我的</ui-view>
+          </ui-col>
+          <ui-col vertical-align="middle" align="center" width="50">
+            <ui-icon name="setting" size="24" color="#fff"></ui-icon>
+          </ui-col>
+        </ui-row>
+      </ui-nav-bar>
+      <ui-view class="user_content">
+        <ui-row height="150" class="header_top">
+          <ui-col vertical-align="middle" align="center" width="90">
+            <ui-view class="head_portrait">
+            </ui-view>
+            <ui-image
+            src="https://chrisgou.github.io/images/mayi_img/portrait_bg.png"
+            mode='aspectFill'
+            width="60"
+            height="60"
+            class="head_portrait"
+            ></ui-image>
+          </ui-col>
+          <ui-col vertical-align="middle" align="left">
+            <ui-view class="login">立即登录</ui-view>
+            <ui-view class="login_after">登录后可享受更多特权</ui-view>
+          </ui-col>
+          <ui-col vertical-align="middle" align="right" width="50" space-right="15">
+            <ui-icon name="arrow-right" size="18" color="#fff"></ui-icon>
+          </ui-col>
+        </ui-row>
+        
+      </ui-view>
+    </ui-page>
+</template>
+
+<script>
+export default {
+  config: {
+    navigationStyle: 'custom',
+    navigationBarTextStyle: 'white',
+    backgroundColor: '#F4F4F4'
+  },
+  data () {
+    return {
+      // portraitUrl: require('#/images/portrait_bg.png')
+    }
+  },
+  methods: {
+
+  }
+}
+
+</script>
+
+<style lang="less">
+
+.nav_bar {
+    background: @theme-color;
+    .nav_title {
+        color: #fff;
+    }
+}
+
+.header_top {
+    background: @theme-color;
+    .head_portrait {
+      border-radius: 50%; 
+    }
+    .login {
+      color: #fff;
+      font-size: 18px;
+    }
+    .login_after {
+        color: #fff;
+        font-size: 12px;
+    }
+}
+
+</style>

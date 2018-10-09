@@ -1,0 +1,34 @@
+<template>
+  <ui-page>
+    <ui-view class="content" style="{{{ height:contentHeight+'px' }}}">
+      Hello UILeader!
+    </ui-view>
+  </ui-page>
+</template>
+
+<script>
+export default {
+  config: {
+    navigationBarTitleText: '详情'
+  },
+  data () {
+    return {
+      contentHeight: ui.DEFAULT_CONTENT_HEIGHT
+    }
+  },
+  methods: {
+    buttonHandle () {
+
+    }
+  }
+}
+
+</script>
+
+<style lang="less">
+.content{
+  .mix-flex-center();
+  font-size: 24px;
+}
+
+</style>
