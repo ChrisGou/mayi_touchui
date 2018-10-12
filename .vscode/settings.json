@@ -1,6 +1,6 @@
 {
     "touchui.deving": false,
-    "touchui.builded": false,
+    "touchui.builded": true,
     "touchui.enable": true,
     "files.associations": {
         "*.jsp": "java",

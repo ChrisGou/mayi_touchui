@@ -27,7 +27,7 @@
             ></ui-image>
           </ui-col>
           <ui-col vertical-align="middle" align="left">
-            <ui-view class="login">立即登录</ui-view>
+            <ui-view class="login">立即登录hahahaah55556666</ui-view>
             <ui-view class="login_after">登录后可享受更多特权</ui-view>
           </ui-col>
           <ui-col vertical-align="middle" align="right" width="50" space-right="15">

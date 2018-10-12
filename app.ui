@@ -199,9 +199,123 @@ export default {
         }
       }
       return {};
+    },
+    // 获取当前版本号
+    gegetAppInfo() {
+      // 判断当前手机系统。
+      if (this.IS_ANDROID) {
+        this.type = "android";
+      } else if (this.IS_IOS) {
+        this.type = "ios";
+      }
+      // console.log('获取当前版本号')
+      ui.getAppInfo({
+        success: res => {
+          this.thisVer = res.version;
+          this.comparison();
+        }
+      });
+    },
+    // 下载安装包
+
+    downFile(downUrl) {
+      console.log("进入下载", downUrl);
+      ui.showLoading({
+        text: "正在下载"
+      });
+      ui.downloadFile({
+        url: downUrl,
+        success: res => {
+          console.log(res, "下载安装包成功");
+          ui.hideLoading();
+          this.installFile(res.tempFilePath);
+        }
+      });
+    },
+    // 安装安装包
+    installFile(filePath) {
+      let IS_IOS;
+      console.log("进入安装过程", filePath);
+      ui.showLoading({
+        text: "正在安装"
+      });
+      ui.installPackage({
+        src: filePath,
+        success: res => {
+          console.log(res, "安装安装包成功");
+          ui.showToast({ title: "安装安装包成功", duration: 3000 })
+          ui.hideLoading();
+          IS_IOS = ui.IS_IOS;
+          if (IS_IOS) {
+            ui.showConfirm({
+              content: "更新成功。点击确认关闭应用。然后重新打开",
+              confirmButtonText: "确认",
+              cancelButtonText: "取消",
+              success: res => {
+                console.log(res);
+                if (res.confirm) {
+                  //关闭应用
+                  ui.closeApp();
+                }
+              }
+            });
+          } else {
+            ui.showConfirm({
+              content: "更新成功。点击确认重新启动",
+              confirmButtonText: "确认",
+              cancelButtonText: "取消",
+              success: res => {
+                console.log(res);
+                if (res.confirm) {
+                  //重启应用
+                  ui.restartApp();
+                }
+              }
+            });
+          }
+        },
+        fall: res => {
+          ui.showToast({ title: res, duration: 10000 })
+          ui.hideLoading();
+        }
+      });
+    },
+
+    // 对比版本号及安装
+    comparison() {
+      let downUrl;
+      ui.request({
+        url: "http://rap2api.taobao.org/app/mock/87654/getWgt", //仅为示例，并非真实的接口地址
+        data: {
+          version: this.thisVer,
+          type: this.type
+        },
+        success: res => {
+          if (res.data.code === 1) {
+            return false;
+          } else if (res.data.code === 0) {
+            downUrl = res.data.data.url;
+            // let result = ui.compareVersions(this.thisVer,res.data.data.version)
+            // console.log(result,downUrl)
+            ui.showConfirm({
+              content: "检查到有新的应用更新，是否现在更新？",
+              confirmButtonText: "去更新",
+              cancelButtonText: "取消",
+              success: res => {
+                if (res.confirm) {
+                  // 下载并安装
+                  this.downFile(downUrl);
+                }
+              }
+            });
+          }
+        }
+      });
     }
   },
-  mounted() {}
+  mounted() {
+    this.gegetAppInfo()
+  }
 };
 </script>
 
@@ -363,5 +477,4 @@ body {
 .bg-FFF {
   background-color: #fff;
 }
-
 </style>

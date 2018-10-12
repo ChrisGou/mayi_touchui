@@ -21,6 +21,8 @@
   当然你可以只编译当前项目，然后手动在touchui-pack\dist的index.html添加内容 <script src="__app__.js"></script>，然后复制替换到/Documents/Pandora/apps/apploader/www中
 
   但是不推荐这么做，最合理的是不连接手机，然后先WeTouch单独编译当前项目 ，再WeTouch在ios设备运行，就会生成最新的资源包了
+
+  还有一种方法是Wetouch导出资源升级包，先单独编译当前项目，然后导出资源升级包（app.wgt）,改成zip解压即为最新的资源包内容
   
 - 在线云打包的原理猜测
   云端重新生成自定义的app壳子，然后同步资源，无非就是改了点app名字和图标，但免费版有流量限制，好像是100M就不让玩了
@@ -28,10 +30,18 @@
   但是每次修改后都需要重签名ipa包 参考 http://www.cocoachina.com/ios/20180530/23571.html?utm_source=tuicool&utm_medium=referral
   自测用过第三种方法iOS App Signer生效 项目地址 https://github.com/DanTheMan827/ios-app-signer
   将项目下载到本地，用Xcode打开iOS App Signer.xcodeproj然后运行
-  必须保证要重签名的证书和 provisoning 文件必须匹配，如果你无法确定是否匹配，则可以新建一个Xcode项目然后新建一个Team Account用户
-  然后manage certificate 新增一个 ios Development就会自动生成证书和provisoning文件，它们是绝对匹配的
-  成功重签名后会生成新的ipa包，最后通过爱思助手电脑版安装即可，itools助手实测无效
-  也可以将ipa包上传到蒲公英方便其他人安装
+  重签名需要证书和描述文件，个人免费appid开发者可以使用软件制作证书和描述文件添加3台设备（须知道设备udid，且有效期只有7天）
+  软件地址 http://www.applicationloader.net/appuploader/download.php
+  使用教程 http://www.applicationloader.net/blog/zh/1073.html
+  个人免费appid账号可关注公众号--更不更新全看心情--获取
+  成功重签名后会生成新的ipa包，最后只能通过爱思助手电脑版安装，itools助手实测无效
+  若想将ipa包上传到蒲公英方便添加了udid设备的人安装，则目测只能用99美刀的开发者账号生成证书和描述文件重签名了
+
+- 热更新原理
+  无需重新打包签名，Wetouch导出资源升级包后，使用app.ui中的代码安装，参考 http://www.wetouch.net/wetouch_doc/expand/hotUpdate/examples
+  注意事项：每次Wetouch导出资源升级包前都必须修改根目录下的 build_config/config.json 中的versionName和versionCode字段,并且必须大于上一次版本号，否则热更新时一直处在正在安装状态
+  可配合http://rap2.taobao.org作为模拟简单的版本控制后台接口，当需要更新时更改-是否需要热更新-字段，wgt包放在内网穿透的服务器上
+  当然最好自己用node做一个简易的后台来记录版本号
 
 ## 遇到的问题
 - 转小程序后需要重新在小程序项目中配置iconfont相关文件 http://www.wetouch.net/touchwx_doc/transform/transform/conversions 手动调整
