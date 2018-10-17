@@ -23,10 +23,12 @@
   但是不推荐这么做，最合理的是不连接手机，然后先WeTouch单独编译当前项目 ，再WeTouch在ios设备运行，就会生成最新的资源包了
 
   还有一种方法是Wetouch导出资源升级包，先单独编译当前项目，然后导出资源升级包（app.wgt）,改成zip解压即为最新的资源包内容
-  
+
+
 - 在线云打包的原理猜测
   云端重新生成自定义的app壳子，然后同步资源，无非就是改了点app名字和图标，但免费版有流量限制，好像是100M就不让玩了
   此时就需要自己反编译原始app壳子，改改图标和名字，就变成属于自己的app了
+  -- ipa反编译
   但是每次修改后都需要重签名ipa包 参考 http://www.cocoachina.com/ios/20180530/23571.html?utm_source=tuicool&utm_medium=referral
   自测用过第三种方法iOS App Signer生效 项目地址 https://github.com/DanTheMan827/ios-app-signer
   将项目下载到本地，用Xcode打开iOS App Signer.xcodeproj然后运行
@@ -36,11 +38,24 @@
   个人免费appid账号可关注公众号--更不更新全看心情--获取
   成功重签名后会生成新的ipa包，最后只能通过爱思助手电脑版安装，itools助手实测无效
   若想将ipa包上传到蒲公英方便添加了udid设备的人安装，则目测只能用99美刀的开发者账号生成证书和描述文件重签名了
+  -- apk反编译
+  使用apktools 软件地址 https://pan.baidu.com/s/1CTi1KiC505gM_k4XaX2_SQ
+  将apploader.apk与apktool.bat,apktool.jar放在同一目录
+  执行命令 apktool d apploader.apk 将会生成反编译后的apploader文件夹
+  在apploader/data文件夹中新建apps/apploader/www文件夹
+  将wgt资源包解压后的内容放入到apps/apploader/www文件夹
+  修改apk名字 在apploader\res\values\strings.xml中修改为<string name="app_name">苟哥宝</string>
+  修改apk图标和启动图标，搜索icon 和splash,替换为对应大小的png图片，可以使用tinypng进行压缩后再替换
+  执行命令 apktool.bat b apploader 将会在apploader文件夹中生成重新打包后的dist/apploader.apk
+  登录 http://www.uileader.com/uileader/main.do ，在WeTouch / 安卓证书生成 页面中生成keystore证书 记住别名 例如GGB
+  将证书重命名为GGB.keystore,与重新打包后的apk放在同级目录中
+  执行命令 jarsigner -keystore GGB.keystore apploader.apk GGB 重新签名
+  执行命令 jarsigner -verify -verbose apploader.apk 验证签名
+  参考 https://blog.csdn.net/sxk874890728/article/details/80486223
 
 - 热更新原理
   无需重新打包签名，Wetouch导出资源升级包后，使用app.ui中的代码安装，参考 http://www.wetouch.net/wetouch_doc/expand/hotUpdate/examples
-  注意事项：每次Wetouch导出资源升级包前都必须修改根目录下的 build_config/config.json 中的versionName和versionCode字段,并且必须大于上一次版本号，否则热更新时一直处在正在安装状态
-  可配合http://rap2.taobao.org作为模拟简单的版本控制后台接口，当需要更新时更改-是否需要热更新-字段，wgt包放在内网穿透的服务器上
+  可配合 http://rap2.taobao.org 作为模拟简单的版本控制后台接口，当需要更新时更改-是否需要热更新-字段，wgt包放在内网穿透的服务器上
   当然最好自己用node做一个简易的后台来记录版本号
 
 ## 遇到的问题
@@ -65,4 +80,5 @@
 - 由于框架全局设置了行高为1.6倍，所以icon默认行高也是1.6倍。当icon尺寸比较大时，上下留白比较明显。这时可以手动为这个组件设置行高，以保证留白正常。
 - flex row布局时若想要某个元素放在最右边，使用 justify-self: flex-end 无效；此时需要对该元素 margin-left: auto 即可
 - 自定义组件less使用嵌套语法时，必须保证根元素class属性有且只有一个
+- 每次Wetouch导出资源升级包前都必须修改根目录下的 build_config/config.json 中的versionName和versionCode字段,并且必须大于上一次版本号，并且导出wgt资源包的时候需要指定对应的版本号命名（例如：app1.1.8.wgt），否则热更新时一直处在正在安装状态
 - 移动端在线加载pdf方案（用于app端不支持a链接跳转加载pdf） https://mozilla.github.io/pdf.js/web/viewer.html?file=https://chrisgou.github.io/file/201712.pdf

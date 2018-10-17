@@ -243,7 +243,6 @@ export default {
         src: filePath,
         success: res => {
           console.log(res, "安装安装包成功");
-          ui.showToast({ title: "安装安装包成功", duration: 3000 })
           ui.hideLoading();
           IS_IOS = ui.IS_IOS;
           if (IS_IOS) {
@@ -273,10 +272,6 @@ export default {
               }
             });
           }
-        },
-        fall: res => {
-          ui.showToast({ title: res, duration: 10000 })
-          ui.hideLoading();
         }
       });
     },
@@ -285,7 +280,7 @@ export default {
     comparison() {
       let downUrl;
       ui.request({
-        url: "http://rap2api.taobao.org/app/mock/87654/getWgt", //仅为示例，并非真实的接口地址
+        url: "http://rap2api.taobao.org/app/mock/87654/gougebao/wgt", //仅为示例，并非真实的接口地址
         data: {
           version: this.thisVer,
           type: this.type
@@ -295,19 +290,20 @@ export default {
             return false;
           } else if (res.data.code === 0) {
             downUrl = res.data.data.url;
-            // let result = ui.compareVersions(this.thisVer,res.data.data.version)
-            // console.log(result,downUrl)
-            ui.showConfirm({
-              content: "检查到有新的应用更新，是否现在更新？",
-              confirmButtonText: "去更新",
-              cancelButtonText: "取消",
-              success: res => {
-                if (res.confirm) {
-                  // 下载并安装
-                  this.downFile(downUrl);
+            let result = ui.compareVersions(this.thisVer,res.data.data.version)
+            if(result === -1) {//当前版本低于最新版本
+              ui.showConfirm({
+                content: "检查到有新的应用更新，是否现在更新？",
+                confirmButtonText: "去更新",
+                cancelButtonText: "取消",
+                success: res => {
+                  if (res.confirm) {
+                    // 下载并安装
+                    this.downFile(downUrl);
+                  }
                 }
-              }
-            });
+              });
+            }
           }
         }
       });
