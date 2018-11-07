@@ -28,7 +28,9 @@
 - 在线云打包的原理猜测
   云端重新生成自定义的app壳子，然后同步资源，无非就是改了点app名字和图标，但免费版有流量限制，好像是100M就不让玩了
   此时就需要自己反编译原始app壳子，改改图标和名字，就变成属于自己的app了
-  -- ipa反编译
+  
+  ipa反编译
+  
   但是每次修改后都需要重签名ipa包 参考 http://www.cocoachina.com/ios/20180530/23571.html?utm_source=tuicool&utm_medium=referral
   自测用过第三种方法iOS App Signer生效 项目地址 https://github.com/DanTheMan827/ios-app-signer
   将项目下载到本地，用Xcode打开iOS App Signer.xcodeproj然后运行
@@ -38,7 +40,9 @@
   个人免费appid账号可关注公众号--更不更新全看心情--获取
   成功重签名后会生成新的ipa包，最后只能通过爱思助手电脑版安装，itools助手实测无效
   若想将ipa包上传到蒲公英方便添加了udid设备的人安装，则目测只能用99美刀的开发者账号生成证书和描述文件重签名了
-  -- apk反编译
+  
+  apk反编译
+  
   使用apktools 软件地址 https://pan.baidu.com/s/1CTi1KiC505gM_k4XaX2_SQ
   将apploader.apk与apktool.bat,apktool.jar放在同一目录
   执行命令 apktool d apploader.apk 将会生成反编译后的apploader文件夹
