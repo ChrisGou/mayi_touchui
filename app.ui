@@ -280,7 +280,7 @@ export default {
     comparison() {
       let downUrl;
       ui.request({
-        url: "http://rap2api.taobao.org/app/mock/87654/gougebao/wgt", //仅为示例，并非真实的接口地址
+        url: "http://www.mockhttp.cn/mock/chrisgou/gougebao/wgt", //仅为示例，并非真实的接口地址
         data: {
           version: this.thisVer,
           type: this.type

@@ -27,8 +27,8 @@
             ></ui-image>
           </ui-col>
           <ui-col vertical-align="middle" align="left">
-            <ui-view class="login">立即登录1.1.8</ui-view>
-            <ui-view class="login_after">登录后可享受更多特权</ui-view>
+            <ui-view class="login">立即登录1.2.1</ui-view>
+            <ui-view class="login_after">午后午后，改革春风吹满地</ui-view>
           </ui-col>
           <ui-col vertical-align="middle" align="right" width="50" space-right="15">
             <ui-icon name="arrow-right" size="18" color="#fff"></ui-icon>
@@ -53,6 +53,9 @@ export default {
   },
   methods: {
 
+  },
+  mounted() {
+    ui.showToast({ title: '都午后了，还不睡觉！！' ,duration: 3000})
   }
 }
 

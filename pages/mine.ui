@@ -30,7 +30,8 @@
 <script>
 export default {
   config: {
-    navigationBarTitleText: "基金"
+    navigationBarTitleText: "基金",
+    navigationBarTextStyle: "black"
   },
   data() {
     return {
@@ -38,7 +39,8 @@ export default {
     }
   },
   methods: {},
-  mounted() {}
+  mounted() {
+  }
 }
 </script>
 

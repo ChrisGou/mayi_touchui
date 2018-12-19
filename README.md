@@ -59,8 +59,8 @@
 
 - 热更新原理
   无需重新打包签名，Wetouch导出资源升级包后，使用app.ui中的代码安装，参考 http://www.wetouch.net/wetouch_doc/expand/hotUpdate/examples
-  可配合 http://rap2.taobao.org 作为模拟简单的版本控制后台接口，当需要更新时更改-是否需要热更新-字段，wgt包放在内网穿透的服务器上
-  当然最好自己用node做一个简易的后台来记录版本号
+  可配合 http://www.mockhttp.cn/ 作为模拟简单的版本控制后台接口，当需要更新时更改-version-字段和对应的wgt更新包地址，wgt包放在github.io或内网穿透的服务器上
+  每次Wetouch导出资源升级包前都必须修改根目录下的 build_config/config.json 中的versionName和versionCode字段,并且必须大于上一次版本号，并且导出wgt资源包的时候需要指定对应的版本号命名（例如：app1.1.8.wgt），否则热更新时一直处在正在安装状态
 
 ## 遇到的问题
 - 转小程序后需要重新在小程序项目中配置iconfont相关文件 http://www.wetouch.net/touchwx_doc/transform/transform/conversions 手动调整
@@ -84,5 +84,4 @@
 - 由于框架全局设置了行高为1.6倍，所以icon默认行高也是1.6倍。当icon尺寸比较大时，上下留白比较明显。这时可以手动为这个组件设置行高，以保证留白正常。
 - flex row布局时若想要某个元素放在最右边，使用 justify-self: flex-end 无效；此时需要对该元素 margin-left: auto 即可
 - 自定义组件less使用嵌套语法时，必须保证根元素class属性有且只有一个
-- 每次Wetouch导出资源升级包前都必须修改根目录下的 build_config/config.json 中的versionName和versionCode字段,并且必须大于上一次版本号，并且导出wgt资源包的时候需要指定对应的版本号命名（例如：app1.1.8.wgt），否则热更新时一直处在正在安装状态
 - 移动端在线加载pdf方案（用于app端不支持a链接跳转加载pdf） https://mozilla.github.io/pdf.js/web/viewer.html?file=https://chrisgou.github.io/file/201712.pdf
