@@ -6,16 +6,20 @@
 
 ## 关于本地ios设备运行与在线云打包的原理猜测与破解
 - 本地ios设备运行原理猜测与破解
-  安装了WeTouch的vscode插件后
-  插件源码生成在C:\Users\xn067391\.vscode\extensions\uileader.vstouchui-1.5.2
-  其中的node_modules\apploader\temp\download\apploader文件夹下即为原始的app壳子
-  安装打开后显示 AppLoader 等待传输文件
-  在WeTouch工程中右键出现的 WeTouch单独编译当前项目实际生成编译目录C:\Users\xn067391\.vscode\extensions\uileader.vstouchui-1.5.2\node_modules\touchui-pack\dist中
-  但是要想在app中正确同步资源，其中的index.html中缺少一段内容 <script src="__app__.js"></script>
-  这段内容实际上是在WeTouch工程中右键出现的 WeTouch在ios设备运行 时注入到www文件的index.html中
-  在WeTouch工程中右键出现的 WeTouch在ios设备运行 实际上是传输文件到原始的app壳子的/Documents/Pandora/apps/apploader/www文件夹中
-  而这个www文件夹是WeTouch工程中右键出现的 WeTouch在ios设备运行 生成的，目录在uileader.vstouchui-1.5.2\node_modules\apploader\temp\www
-  那么我们可以用itools等ios手机助手工具将单独编译生成的www文件拷贝替换到原始的app壳子的/Documents/Pandora/apps/apploader/www文件夹中
+  安装了WeTouch的vscode插件后  
+  插件源码生成在C:\Users\xn067391\.vscode\extensions\uileader.vstouchui-1.5.2 
+  其中的node_modules\apploader\temp\download\apploader文件夹下即为原始的app壳子  
+  安装打开后显示 AppLoader 等待传输文件  
+  在WeTouch工程中右键出现的 WeTouch单独编译当前项目实际生成编译目录  
+  C:\Users\xn067391\.vscode\extensions\uileader.vstouchui-1.5.2\node_modules\touchui-pack\dist中  
+  但是要想在app中正确同步资源，其中的index.html中缺少一段内容 <script src="__app__.js"></script>  
+  这段内容实际上是在WeTouch工程中右键出现的 WeTouch在ios设备运行 时注入到www文件的index.html中  
+  在WeTouch工程中右键出现的 WeTouch在ios设备运行  
+  实际上是传输文件到原始的app壳子的/Documents/Pandora/apps/apploader/www文件夹中  
+  而这个www文件夹是WeTouch工程中右键出现的 WeTouch在ios设备运行 生成的  
+  目录在uileader.vstouchui-1.5.2\node_modules\apploader\temp\www
+  那么我们可以用itools等ios手机助手工具将单独编译生成的www文件拷贝替换  
+  到原始的app壳子的/Documents/Pandora/apps/apploader/www文件夹中  
   然后重启app即可生效
 
   当然你可以只编译当前项目，然后手动在touchui-pack\dist的index.html添加内容 <script src="__app__.js"></script>，然后复制替换到/Documents/Pandora/apps/apploader/www中
